@@ -47,6 +47,13 @@ jobs:
           PORT: 3333
           LOG_LEVEL: silent
           DB_CONNECTION: sqlite
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          DB_DATABASE: test_db
+          # --- Fim das linhas novas ---
+          
           # --- Fim do bloco ---
 
       # 6. Aciona o deploy no Render APENAS se os testes passarem
