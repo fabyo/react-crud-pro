@@ -1,0 +1,26 @@
+# .github/workflows/deploy-api.yml
+
+# ... (código existente) ...
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run API tests # NOVO PASSO!
+        run: pnpm --filter api test
+
+      - name: Trigger Render Deploy # Só roda se os testes passarem
+        if: success()
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
