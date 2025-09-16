@@ -1,0 +1,25 @@
+# .gitignore
+
+# Dependencies
+/node_modules
+/.pnpm-store
+
+# Build Outputs
+/dist
+/build
+/.next
+/out
+
+# Adonis
+/tmp
+/coverage
+ace-manifest.json
+.env
+
+# Next.js
+next-env.d.ts
+*.log
+
+# IDEs and OS
+.DS_Store
+.vscode/
