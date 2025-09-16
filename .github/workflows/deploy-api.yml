@@ -39,6 +39,15 @@ jobs:
       # 5. Roda os testes específicos da API (nosso portão de qualidade!)
       - name: Run API tests
         run: pnpm --filter api test
+        env:
+          # --- Adicione este bloco ---
+          NODE_ENV: test
+          APP_KEY: test-app-key-is-32-long-enough # Uma chave simples para testes
+          HOST: 127.0.0.1
+          PORT: 3333
+          LOG_LEVEL: silent
+          DB_CONNECTION: sqlite
+          # --- Fim do bloco ---
 
       # 6. Aciona o deploy no Render APENAS se os testes passarem
       - name: Trigger Render Deploy
