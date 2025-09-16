@@ -1,26 +1,46 @@
-# .github/workflows/deploy-api.yml
+name: Deploy API to Render
 
-# ... (código existente) ...
+on:
+  # Gatilho 1: Rodar quando houver um push na branch main...
+  push:
+    branches: [ main ]
+    # ...mas APENAS se os arquivos modificados estiverem na pasta da API.
+    paths: [ 'apps/api/**', '.github/workflows/deploy-api.yml' ]
+
+  # Gatilho 2: Permite acionar este workflow manualmente pela aba "Actions" do GitHub.
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-api:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      # 1. Baixa o código do seu repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura o PNPM (gerenciador de pacotes do monorepo)
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
         with:
-          version: 8
-      - uses: actions/setup-node@v3
+          version: 8 # ou a versão que você usa
+
+      # 3. Configura o Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20' # ou a versão que você usa
           cache: 'pnpm'
 
+      # 4. Instala todas as dependências do monorepo
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run API tests # NOVO PASSO!
+      # 5. Roda os testes específicos da API (nosso portão de qualidade!)
+      - name: Run API tests
         run: pnpm --filter api test
 
-      - name: Trigger Render Deploy # Só roda se os testes passarem
+      # 6. Aciona o deploy no Render APENAS se os testes passarem
+      - name: Trigger Render Deploy
         if: success()
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
