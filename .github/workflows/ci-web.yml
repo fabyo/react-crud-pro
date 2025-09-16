@@ -1,0 +1,49 @@
+name: CI Checks for Web App
+
+on:
+  # Gatilho 1: Rodar em pushes para a main se houver mudanças no frontend.
+  push:
+    branches: [ main ]
+    paths: [ 'apps/web/**', '.github/workflows/ci-web.yml' ]
+
+  # Gatilho 2: Rodar também em Pull Requests para a main.
+  pull_request:
+    branches: [ main ]
+    paths: [ 'apps/web/**' ]
+
+  # Gatilho 3: Manual.
+  workflow_dispatch:
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o código do seu repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura o PNPM
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      # 3. Configura o Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # 4. Instala todas as dependências
+      - name: Install dependencies
+        run: pnpm install
+
+      # 5. Roda os testes específicos do frontend
+      - name: Run Web App tests
+        run: pnpm --filter web test
+
+      # 6. (Opcional, mas recomendado) Roda o Linter para verificar a qualidade do código
+      - name: Run Linter
+        run: pnpm --filter web lint
