@@ -1,0 +1,20 @@
+# docker-compose.yml
+
+services:
+  # Nome do nosso serviço de banco de dados
+  postgres_db:
+    # Imagem oficial do PostgreSQL, versão 16
+    image: postgres:16
+    # Reinicia o container automaticamente se ele parar
+    restart: always
+    # Variáveis de ambiente para configurar o banco de dados
+    environment:
+      POSTGRES_USER: react_crud_db_user
+      POSTGRES_PASSWORD: supertest
+      POSTGRES_DB: react_crud_db
+    # Mapeia a porta 5432 do container para a porta 5432 da sua máquina
+    ports:
+      - "5432:5432"
+    # Garante que os dados do banco sejam salvos em uma pasta local, para não se perderem
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data

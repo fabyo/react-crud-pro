@@ -1,5 +1,10 @@
+import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
+
+console.log('--- DEBUGANDO CREDENCIAIS DO BANCO ---')
+console.log('DB_USER == ', env.get('DB_USER'))
+
 
 const dbConfig = defineConfig({
   connection: 'postgres',
@@ -20,5 +25,9 @@ const dbConfig = defineConfig({
     },
   },
 })
+
+console.log('DB_PASSWORD lido do .env:', env.get('DB_PASSWORD'))
+console.log('------------------------------------')
+// FIM DO DEBUG
 
 export default dbConfig
