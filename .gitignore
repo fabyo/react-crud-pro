@@ -24,3 +24,6 @@ next-env.d.ts
 # IDEs and OS
 .DS_Store
 .vscode/
+
+# Ignorar a pasta de dados do banco de dados Docker
+postgres-data/

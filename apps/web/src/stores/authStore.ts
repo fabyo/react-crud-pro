@@ -2,12 +2,9 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-// Definimos a "forma" do nosso estado
 interface User {
   id: number
   email: string
-  created_at: string
-  updated_at: string
 }
 
 interface AuthState {
@@ -18,7 +15,6 @@ interface AuthState {
   logout: () => void
 }
 
-// Criamos o store com persistência no localStorage
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -26,15 +22,11 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
-      logout: () => {
-        set({ token: null, user: null })
-        // Limpa o localStorage ao deslogar
-        useAuthStore.persist.clearStorage()
-      },
+      logout: () => set({ token: null, user: null }),
     }),
     {
-      name: 'auth-storage', // nome da chave no localStorage
-      storage: createJSONStorage(() => localStorage), // (opcional) por padrão já é o localStorage
+      name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
     }
   )
 )

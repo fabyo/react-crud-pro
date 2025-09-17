@@ -1,0 +1,38 @@
+// apps/api/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de Usuário
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  // Relacionamento: Um usuário pode ter muitos produtos
+  products  Product[]
+}
+
+// Modelo de Produto
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String? // O '?' torna o campo opcional
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Chave estrangeira para o autor do produto
+  authorId Int
+  
+  // Relacionamento: Um produto pertence a um autor (usuário)
+  author   User     @relation(fields: [authorId], references: [id])
+}

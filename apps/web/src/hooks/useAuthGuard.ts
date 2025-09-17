@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
-import { useAuthStore } from '@/stores/authStore';
-import { useRouter } from 'next/navigation';
+// apps/web/src/hooks/useAuthGuard.ts
+'use client'
+
+import { useEffect } from 'react'
+import { useAuthStore } from '@/stores/authStore'
+import { useRouter } from 'next/navigation'
 
 export const useAuthGuard = () => {
-  const token = useAuthStore((state) => state.token);
-  const router = useRouter();
+  const { token, _hasHydrated } = useAuthStore()
+  const router = useRouter()
 
   useEffect(() => {
-    // Se não houver token, redireciona para a página de login
-    if (!token) {
-      router.replace('/login');
+    // Só toma uma decisão DEPOIS que o store foi hidratado
+    if (_hasHydrated && !token) {
+      router.replace('/login')
     }
-  }, [token, router]);
-};
+  }, [token, _hasHydrated, router])
+
+  // Retorna o status para a página poder mostrar um loading
+  return { isAuthLoading: !_hasHydrated }
+}

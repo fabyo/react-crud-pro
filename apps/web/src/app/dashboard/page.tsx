@@ -1,21 +1,19 @@
 // apps/web/src/app/dashboard/page.tsx
 'use client'
 
-import { useAuthGuard } from '@/hooks/useAuthGuard'
 import { useAuthStore } from '@/stores/authStore'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import AuthGuard from '@/components/auth/AuthGuard' // <-- 1. Importe o componente
 
-export default function DashboardPage() {
-  // Este hook garante que apenas usuários logados vejam esta página
-  useAuthGuard()
-
+// Componente interno que contém a lógica da página
+function DashboardContent() {
   const { user, logout } = useAuthStore()
   const router = useRouter()
 
   function handleLogout() {
     logout()
-    router.push('/login')
+    router.replace('/login')
   }
 
   return (
@@ -24,12 +22,19 @@ export default function DashboardPage() {
       <p className="mt-4 text-lg">
         Bem-vindo, <span className="font-semibold">{user?.email}</span>!
       </p>
-      <p className="mt-2 text-gray-500">
-        Esta é uma página protegida.
-      </p>
+      <p className="mt-2 text-gray-500">Esta é uma página protegida.</p>
       <Button onClick={handleLogout} className="mt-8">
         Sair (Logout)
       </Button>
     </div>
+  )
+}
+
+// A página agora exporta o conteúdo protegido dentro do AuthGuard
+export default function DashboardPage() {
+  return (
+    <AuthGuard>  {/* <-- 2. Envolva o conteúdo com o AuthGuard */}
+      <DashboardContent />
+    </AuthGuard>
   )
 }

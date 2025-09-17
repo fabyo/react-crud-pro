@@ -1,3 +1,4 @@
+// apps/web/src/app/register/page.tsx
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,26 +23,19 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { useLogin } from '@/hooks/useLogin' // <-- Vamos usar o hook que planejamos
+import { useRegister } from '@/hooks/useRegister'
 
-// 1. Definição do Schema de Validação com Zod
+// Schema Zod para o formulário de registro
 const formSchema = z.object({
-  email: z
-    .string({ required_error: 'O e-mail é obrigatório.' })
-    .email({ message: 'Por favor, insira um e-mail válido.' }),
-  password: z
-    .string({ required_error: 'A senha é obrigatória.' })
-    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
+  email: z.string().email({ message: 'E-mail inválido.' }),
+  password: z.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
 })
 
-// Inferindo o tipo dos dados do formulário a partir do schema
 type FormData = z.infer<typeof formSchema>
 
-export default function LoginPage() {
-  // Chamamos o nosso hook de mutation que se comunica com a API
-  const { mutate: login, isPending } = useLogin()
+export default function RegisterPage() {
+  const { mutate: register, isPending } = useRegister()
 
-  // 2. Configuração do React Hook Form
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,27 +44,22 @@ export default function LoginPage() {
     },
   })
 
-  // 3. Função de Submissão
   function onSubmit(data: FormData) {
-    console.log('Dados validados:', data)
-    // Chamando a mutation para fazer o login
-    login(data)
+    register(data)
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-950">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Registrar</CardTitle>
           <CardDescription>
-            Entre com seu e-mail e senha para acessar a plataforma.
+            Crie sua conta para acessar a plataforma.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* 4. O Componente <Form> da shadcn/ui que envolve tudo */}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {/* 5. Campo de E-mail */}
               <FormField
                 control={form.control}
                 name="email"
@@ -78,18 +67,13 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>E-mail</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="seu@email.com"
-                        type="email"
-                        {...field}
-                      />
+                      <Input placeholder="seu@email.com" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              {/* 6. Campo de Senha */}
               <FormField
                 control={form.control}
                 name="password"
@@ -97,11 +81,7 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Senha</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="********"
-                        type="password"
-                        {...field}
-                      />
+                      <Input placeholder="********" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -109,17 +89,17 @@ export default function LoginPage() {
               />
 
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? 'Entrando...' : 'Entrar'}
+                {isPending ? 'Registrando...' : 'Criar Conta'}
               </Button>
             </form>
           </Form>
         </CardContent>
-    <div className="mb-4 text-center text-sm">
-      Não tem uma conta?{' '}
-      <Link href="/register" className="underline">
-        Registre-se
-      </Link>
-    </div>
+        <div className="mb-4 text-center text-sm">
+          Já tem uma conta?{' '}
+          <Link href="/login" className="underline">
+            Faça o login
+          </Link>
+        </div>
       </Card>
     </div>
   )
