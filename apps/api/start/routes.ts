@@ -1,6 +1,6 @@
 // apps/api/start/routes.ts
 import router from '@adonisjs/core/services/router'
-import { middleware } from './kernel.js'
+//import { middleware } from './kernel.js'
 
 // Rota raiz para teste de status
 router.get('/', async () => {
