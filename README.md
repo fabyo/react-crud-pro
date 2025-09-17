@@ -1,10 +1,7 @@
 ## 🔥 Full-Stack CRUD Demo — React/Next + Adonis + Postgres CI/CD Tests
 <div>
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
-<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js"/>
-<img src="https://img.shields.io/badge/AdonisJS-5A45FF?style=for-the-badge&logo=adonisjs&logoColor=white" alt="AdonisJS"/>
-<img src="https://img.shields.io/badge/VineJS-5A45FF?style=for-the-badge" alt="VineJS"/>
-<img src="https://img.shields.io/badge/Lucid_ORM-5A45FF?style=for-the-badge" alt="Lucid ORM"/>
+<img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS"/>
 <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
 <img src="https://img.shields.io/badge/Vercel-46E3B7?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"/>
