@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate Prisma Client
+        run: pnpm --filter api exec prisma generate
+
       # 5. Roda os testes específicos da API (nosso portão de qualidade!)
       - name: Run API tests
         run: pnpm --filter api test
