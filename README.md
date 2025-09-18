@@ -28,7 +28,7 @@ Banco PostgreSQL. **Pipeline CI/CD** completo, global via Cloudflare.
 - Domínio & Edge: Cloudflare (DNS, SSL, CDN)
 - Hosting extra: Hetzner (landing/estáticos)
 
-  ## 🧭 Monorepo
+## 🧭 Monorepo
 ```bash
 ├─ api/           # AdonisJS  (TS)
 │  ├─ app/        # controllers, models, validators, auth
