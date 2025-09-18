@@ -30,11 +30,11 @@ const formSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'O e-mail é obrigatório.' }) // <-- MUDANÇA AQUI
-    .email({ message: 'Por favor, insira um e-mail válido.' }),
+    .email({ message: 'Por favor, insira um e-mail válido.' })
   password: z
     .string()
     .min(1, { message: 'A senha é obrigatória.' }) // <-- MUDANÇA AQUI
-    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
+    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
 })
 
 // Inferindo o tipo dos dados do formulário a partir do schema

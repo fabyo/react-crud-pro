@@ -30,11 +30,11 @@ const formSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'O e-mail é obrigatório.' })
-    .email({ message: 'E-mail inválido.' }),
+    .email({ message: 'E-mail inválido.' })
   password: z
     .string()
     .min(1, { message: 'A senha é obrigatória.' })
-    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
+    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
 })
 
 type FormData = z.infer<typeof formSchema>
