@@ -3,17 +3,20 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
+import { PassportModule } from '@nestjs/passport'; // <-- 1. ADICIONE ESTA IMPORTAÇÃO
 
 @Module({
   imports: [
-    PrismaModule, // <-- Importa o PrismaService
-    JwtModule.register({ // <-- Configura o JWT
+    PrismaModule,
+    PassportModule, // <-- 2. ADICIONE ESTE MÓDULO À LISTA
+    JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET || 'seu_segredo_super_secreto_aqui', // Use uma variável de ambiente!
+      secret: process.env.JWT_SECRET || 'yl4q47SzsKp4Etn8yjnCiRBNxSu7npxO',
       signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}
