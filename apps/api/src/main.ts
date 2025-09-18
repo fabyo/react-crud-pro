@@ -9,6 +9,6 @@ async function bootstrap() {
   // ADICIONE ESTA LINHA
   app.enableCors();
 
-  await app.listen(3001); // <-- Garanta que a porta é diferente do seu frontend!
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();
