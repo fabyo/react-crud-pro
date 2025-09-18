@@ -12,39 +12,34 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { useLogin } from '@/hooks/useLogin' // <-- Vamos usar o hook que planejamos
+import { useLogin } from '@/hooks/useLogin'
 
-
-// 1. Definição do Schema de Validação com Zod
 const formSchema = z.object({
   email: z
     .string()
-    .min(1, { message: 'O e-mail é obrigatório.' }) // <-- MUDANÇA AQUI
-    .email({ message: 'Por favor, insira um e-mail válido.' })
+    .min(1, { message: 'O e-mail é obrigatório.' })
+    .email({ message: 'Por favor, insira um e-mail válido.' }), // <-- Vírgula adicionada
   password: z
     .string()
-    .min(1, { message: 'A senha é obrigatória.' }) // <-- MUDANÇA AQUI
-    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
+    .min(1, { message: 'A senha é obrigatória.' })
+    .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
 })
 
-// Inferindo o tipo dos dados do formulário a partir do schema
 type FormData = z.infer<typeof formSchema>
 
 export default function LoginPage() {
-  // Chamamos o nosso hook de mutation que se comunica com a API
   const { mutate: login, isPending } = useLogin()
 
-  // 2. Configuração do React Hook Form
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,10 +48,7 @@ export default function LoginPage() {
     },
   })
 
-  // 3. Função de Submissão
   function onSubmit(data: FormData) {
-    console.log('Dados validados:', data)
-    // Chamando a mutation para fazer o login
     login(data)
   }
 
@@ -70,10 +62,8 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* 4. O Componente <Form> da shadcn/ui que envolve tudo */}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {/* 5. Campo de E-mail */}
               <FormField
                 control={form.control}
                 name="email"
@@ -92,7 +82,6 @@ export default function LoginPage() {
                 )}
               />
 
-              {/* 6. Campo de Senha */}
               <FormField
                 control={form.control}
                 name="password"
@@ -117,12 +106,12 @@ export default function LoginPage() {
             </form>
           </Form>
         </CardContent>
-    <div className="mb-4 text-center text-sm">
-      Não tem uma conta?{' '}
-      <Link href="/register" className="underline">
-        Registre-se
-      </Link>
-    </div>
+        <div className="mb-4 text-center text-sm">
+          Não tem uma conta?{' '}
+          <Link href="/register" className="underline">
+            Registre-se
+          </Link>
+        </div>
       </Card>
     </div>
   )
