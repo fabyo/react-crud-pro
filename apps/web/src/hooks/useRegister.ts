@@ -1,4 +1,3 @@
-// apps/web/src/hooks/useRegister.ts
 'use client'
 
 import { useMutation } from '@tanstack/react-query'
@@ -10,8 +9,13 @@ interface RegisterCredentials {
   password?: string
 }
 
-// 2. Define o tipo de dados que esperamos de volta da API (pode ser 'any' se não for usar)
-type RegisterResponse = any;
+// 2. Define o tipo de dados que esperamos de volta da API
+interface RegisterResponse {
+  id: number
+  email: string
+  createdAt: string
+  updatedAt: string
+}
 
 export const useRegister = () => {
   const router = useRouter()
@@ -25,8 +29,7 @@ export const useRegister = () => {
         body: JSON.stringify(credentials),
       })
       if (!response.ok) {
-        // Tenta pegar uma mensagem de erro mais específica do corpo da resposta
-        const errorData = await response.json().catch(() => ({})) // Pega o JSON ou um objeto vazio
+        const errorData = await response.json().catch(() => ({}))
         throw new Error(errorData.message || 'Falha ao registrar')
       }
       return response.json()
