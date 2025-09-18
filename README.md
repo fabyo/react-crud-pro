@@ -22,7 +22,7 @@ Banco PostgreSQL. **Pipeline CI/CD** completo, domínio próprio e edge global v
 ## 🧩 Stack
 
 - Frontend: ReactJS, Next.js (App Router) · shadcn/ui (Tailwind + Radix) · TanStack Query · React Hook Form + Zod
-- Backend: AdonisJS v6 (TypeScript) · Lucid ORM · VineJS · JWT (guard) · CORS
+- Backend: NestJS (TypeScript) · Prisma ORM · class-validator/class-transformer · Passport JWT (AuthGuard) · CORS · Swagger (OpenAPI)
 - Banco: PostgreSQL 16
 - CI/CD: GitHub Actions · Vercel (UI) · Render (API/DB)
 - Domínio & Edge: Cloudflare (DNS, SSL, CDN)
