@@ -17,7 +17,7 @@
 Projeto de demonstração com foco em arquitetura limpa e escalavel, UX rápida e deploy real.
 Frontend moderno ReactJS (Next + shadcn/ui), formulários tipados (RHF + Zod) e cache de dados (TanStack Query).
 Backend sólido (AdonisJS) com JWT, VineJS, Lucid ORM e CORS ajustado.
-Banco PostgreSQL. **Pipeline CI/CD** completo, domínio próprio e edge global via Cloudflare.
+Banco PostgreSQL. **Pipeline CI/CD** completo, global via Cloudflare.
 
 ## 🧩 Stack
 
