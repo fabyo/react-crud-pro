@@ -58,7 +58,7 @@ Banco PostgreSQL. **Pipeline CI/CD** completo, global via Cloudflare.
 
 - UI — **Vercel**: projeto /ui; NEXT_PUBLIC_API_URL=https://api.dominio.com.
 - API — **Render**: api; build pnpm i --frozen-lockfile && node ace build; start node build/bin/server.js; rodar migrations.
-- **Cloudflare**: app.dominio.com (Vercel) e api.dominio.com (Render), HTTPS e caching.
+- **Cloudflare**:  app.dominio.com (Vercel) e api.dominio.com (Render), HTTPS e caching.
 - **Hetzner**: landing/ativos atrás do Cloudflare
 
 ## 🚀 Deploy — Render (Back)
