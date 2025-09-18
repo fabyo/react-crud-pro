@@ -24,13 +24,16 @@ import {
 import { Input } from '@/components/ui/input'
 import { useLogin } from '@/hooks/useLogin' // <-- Vamos usar o hook que planejamos
 
+
 // 1. Definição do Schema de Validação com Zod
 const formSchema = z.object({
   email: z
-    .string({ required_error: 'O e-mail é obrigatório.' })
+    .string()
+    .min(1, { message: 'O e-mail é obrigatório.' }) // <-- MUDANÇA AQUI
     .email({ message: 'Por favor, insira um e-mail válido.' }),
   password: z
-    .string({ required_error: 'A senha é obrigatória.' })
+    .string()
+    .min(1, { message: 'A senha é obrigatória.' }) // <-- MUDANÇA AQUI
     .min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
 })
 
