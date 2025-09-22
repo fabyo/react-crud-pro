@@ -10,6 +10,7 @@
 <img src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white" alt="Cloudflare"/>
 <img src="https://img.shields.io/badge/CI/CD-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI/CD Pipeline"/>
 <img src="https://img.shields.io/badge/JWT-D63AFF?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT"/>
+<img src="https://img.shields.io/badge/Monorepo-000000?style=for-the-badge&logo=lerna&logoColor=white" alt="Monorepo"/>
 </div>
 
 ## ✨ Visão Geral
